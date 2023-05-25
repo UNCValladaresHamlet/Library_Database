@@ -16,7 +16,6 @@ CREATE TABLE Authors (
     AuthorNationality varchar(255) NOT NULL,
     -- SQL creates a PRIMARY KEY on the "AuthorID" column when the "Author" table is created --
     PRIMARY KEY (AuthorID)
-
 );
 
 -- Creates the table "Books" within library_db --
@@ -47,7 +46,7 @@ CREATE TABLE Clients (
     -- Makes a string column called "Occupation" which cannot contain null --
     Occupation varchar(255) NOT NULL,
     -- SQL creates a PRIMARY KEY on the "ClientID" column when the "Clients" table is created --
-    PRIMARY KEY (ClientID),
+    PRIMARY KEY (ClientID)
 );
 
 -- Creates the table "Borrowers" within library_db --
