@@ -41,8 +41,8 @@ CREATE TABLE Clients (
     ClientFirstName varchar(255) NOT NULL,
     -- Makes a string column called "ClientLastName" which cannot contain null --
     ClientLastName varchar(255) NOT NULL,
-    -- Makes a date column called "Clients Date Of Birth", YYYY-MM-DD --
-    ClientDOB DATE NOT NULL,
+    -- Makes a date column called "Clients Date Of Birth", YYYY --
+    ClientDOB YEAR NOT NULL,
     -- Makes a string column called "Occupation" which cannot contain null --
     Occupation varchar(255) NOT NULL,
     -- SQL creates a PRIMARY KEY on the "ClientID" column when the "Clients" table is created --
