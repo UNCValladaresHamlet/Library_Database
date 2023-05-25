@@ -35,6 +35,21 @@ CREATE TABLE Books (
     FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID)
 );
 
+CREATE TABLE Clients (
+    -- Makes a numeric column called "ClientID" which will automatically increment its default value as we create new rows, which cannot contain null --
+    ClientID int AUTO_INCREMENT NOT NULL,
+    -- Makes a string column called "ClientFirstName" which cannot contain null --
+    ClientFirstName varchar(255) NOT NULL,
+    -- Makes a string column called "ClientLastName" which cannot contain null --
+    ClientLastName varchar(255) NOT NULL,
+    -- Makes a date column called "Clients Date Of Birth", YYYY-MM-DD --
+    ClientDOB DATE NOT NULL,
+    -- Makes a string column called "Occupation" which cannot contain null --
+    Occupation varchar(255) NOT NULL,
+    -- SQL creates a PRIMARY KEY on the "ClientID" column when the "Clients" table is created --
+    PRIMARY KEY (ClientID),
+);
+
 -- Creates the table "Borrowers" within library_db --
 CREATE TABLE Borrowers (
     -- Makes a numeric column called "BorrowID" which will automatically increment its default value as we create new rows, which cannot contain null --
@@ -44,7 +59,7 @@ CREATE TABLE Borrowers (
     -- Makes a numeric column called "BookID" which cannot contain null --
     BookID int NOT NULL,
     -- Makes a date column called "BorrowDate", YYYY-MM-DD --
-    BorrowDate DATE,
+    BorrowDate DATE NOT NULL,
     -- SQL creates a PRIMARY KEY on the "BorrowID" column when the "Borrowers" table is created --
     PRIMARY KEY (BorrowID),
     -- SQL creates a FOREIGN KEY on the "ClientID" column when the "Borrower" table is created--
