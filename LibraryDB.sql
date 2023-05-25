@@ -19,13 +19,14 @@ CREATE TABLE Authors (
 
 );
 
+-- Creates the table "Books" within library_db --
 CREATE TABLE Books (
-    -- Makes a numeric column called "BookID" which cannot contain null --
-    BookID int AUTO_INCREMEN NOT NULL,
+    -- Makes a numeric column called "BookID" which will automatically increment its default value as we create new rows, which cannot contain null --
+    BookID int AUTO_INCREMENT NOT NULL,
     -- Makes a string column called "BookTitle" which cannot contain null --
     BookTitle varchar(255) NOT NULL,
     -- Makes a numeric column called "AuthorID" which cannot contain null --
-    AuthorID int FOREIGN KEY NOT NULL,
+    AuthorID int NOT NULL,
     -- Makes a string column called "Genre" which cannot contain null --
     Genre varchar(255),
     -- SQL creates a PRIMARY KEY on the "BookID" column when the "Books" table is created --
@@ -33,4 +34,24 @@ CREATE TABLE Books (
     -- SQL creates a FOREIGN KEY on the "AuthorID" column when the "Books" table is created--
     FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID)
 );
+
+-- Creates the table "Borrowers" within library_db --
+CREATE TABLE Borrowers (
+    -- Makes a numeric column called "BorrowID" which will automatically increment its default value as we create new rows, which cannot contain null --
+    BorrowID int AUTO_INCREMENT NOT NULL,
+    -- Makes a numeric column called "ClientID" which cannot contain null --
+    ClientID int NOT NULL,
+    -- Makes a numeric column called "BookID" which cannot contain null --
+    BookID int NOT NULL,
+    -- Makes a date column called "BorrowDate", YYYY-MM-DD --
+    BorrowDate DATE,
+    -- SQL creates a PRIMARY KEY on the "BorrowID" column when the "Borrowers" table is created --
+    PRIMARY KEY (BorrowID),
+    -- SQL creates a FOREIGN KEY on the "ClientID" column when the "Borrower" table is created--
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+    -- SQL creates a FOREIGN KEY on the "BookID" column when the "Borrower" table is created--
+    FOREIGN KEY (BookID) REFERENCES Books(BookID)
+);
+
+
 
