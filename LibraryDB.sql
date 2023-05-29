@@ -9,11 +9,11 @@ CREATE TABLE Authors (
     -- Makes a numeric column called "AuthorID" which will automatically increment its default value as we create new rows, which also cannot contain null --
     AuthorID int AUTO_INCREMENT NOT NULL,
     -- Makes a string column called "AuthorFirstName" which cannot contain null --
-    AuthorFirstName varchar(255) NOT NULL,
+    AuthorFirstName VARCHAR(255) NOT NULL,
     -- Makes a string column called "AuthorLastName" which cannot contain null --
-    AuthorLastName varchar(255) NOT NULL,
+    AuthorLastName VARCHAR(255) NOT NULL,
     -- Makes a string column called "AuthorNationality" which cannot contain null --
-    AuthorNationality varchar(255) NOT NULL,
+    AuthorNationality VARCHAR(255) NOT NULL,
     -- SQL creates a PRIMARY KEY on the "AuthorID" column when the "Author" table is created --
     PRIMARY KEY (AuthorID)
 );
@@ -23,11 +23,11 @@ CREATE TABLE Books (
     -- Makes a numeric column called "BookID" which will automatically increment its default value as we create new rows, which cannot contain null --
     BookID int AUTO_INCREMENT NOT NULL,
     -- Makes a string column called "BookTitle" which cannot contain null --
-    BookTitle varchar(255) NOT NULL,
+    BookTitle VARCHAR(255) NOT NULL,
     -- Makes a numeric column called "AuthorID" which cannot contain null --
     AuthorID int NOT NULL,
     -- Makes a string column called "Genre" which cannot contain null --
-    Genre varchar(255),
+    Genre VARCHAR(255),
     -- SQL creates a PRIMARY KEY on the "BookID" column when the "Books" table is created --
     PRIMARY KEY (BookID),
     -- SQL creates a FOREIGN KEY on the "AuthorID" column when the "Books" table is created--
@@ -38,13 +38,13 @@ CREATE TABLE Clients (
     -- Makes a numeric column called "ClientID" which will automatically increment its default value as we create new rows, which cannot contain null --
     ClientID int AUTO_INCREMENT NOT NULL,
     -- Makes a string column called "ClientFirstName" which cannot contain null --
-    ClientFirstName varchar(255) NOT NULL,
+    ClientFirstName VARCHAR(255) NOT NULL,
     -- Makes a string column called "ClientLastName" which cannot contain null --
-    ClientLastName varchar(255) NOT NULL,
+    ClientLastName VARCHAR(255) NOT NULL,
     -- Makes a date column called "Clients Date Of Birth", YYYY --
     ClientDOB YEAR NOT NULL,
     -- Makes a string column called "Occupation" which cannot contain null --
-    Occupation varchar(255) NOT NULL,
+    Occupation VARCHAR(255) NOT NULL,
     -- SQL creates a PRIMARY KEY on the "ClientID" column when the "Clients" table is created --
     PRIMARY KEY (ClientID)
 );

@@ -144,6 +144,9 @@ INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) val
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Maia', 'Grant', 1984 , 'School Teacher');
 
 
+-- Creates new rows containing data in all named columns for the 'Borrowers' table --
+
+
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 35 , 17 , '2016-07-20' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 1 , 3 , '2017-04-19' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 42  , 8 , '2016-10-03' );
@@ -439,7 +442,7 @@ INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 77 , 7 ,	'2017-01-
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 74 , 25 ,	'2015-09-25' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 47 , 14 ,	'2018-02-01' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 10 , 2 ,	'2017-04-18' );
-INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 16, 21, '2016-10-03' );
+INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 16, 21 , '2016-10-03' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 48 , 5 ,	'2016-09-17' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 72 , 3 ,	'2017-02-10' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 26 , 23 ,	'2016-03-01' );
