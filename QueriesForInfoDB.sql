@@ -60,6 +60,16 @@
     GROUP BY Borrowers.BookID
     ORDER BY COUNT(Borrowers.BookID) DESC LIMIT 5;
 
+    SELECT AuthorFirstName, AuthorLastName
+    FROM Authors
+    INNER JOIN Books
+    ON Authors.AuthorID = Books.AuthorID
+    INNER JOIN Borrowers
+    ON Borrowers.BookID = Books.BookID
+    WHERE BorrowDate BETWEEN '2017-01-01' AND '2017-12-31'
+    GROUP BY Borrowers.BookID
+    ORDER BY COUNT(Borrowers.BookID) DESC LIMIT 5;
+
 -- 5. Nationalities of the least 5 authors that clients borrowed during the years 2015-2017 --
 
 -- This command selects this specific column: AuthorNationality from the 'Authors' table to list in the result-set. I used a INNER JOIN to selects records that help me find the matching values from the 'Authors' table and the selected 'Books' table. I specified which tables and columns I wanted to access using the ON keyword. I used the 'AuthorsID' column that the tables both share to finish the INNER JOIN. I used a second INNER JOIN to find the matching values from the 'Books' table and the selected 'Borrowers' table. I used the 'BooksID' column that the tables both share to finish the second INNER JOIN. I used the WHERE clause to filter the records in order to extract only those records in the 'BorrowDate' column that are between the January 1st, 2015 and December 31st, 2017. I used a GROUP BY statement to group the result-set by the 'AuthorNationality' column. I then used the ORDER BY keyword and the The COUNT() function to count how many times the number of books in the result-set was borrowed in the "Borrowed" table. I originally added a auto increment in the Book ID column which lists the table data in ascending order. I sorted the result-set and used a LIMIT clause to specify the number of records to return, I used 5 to list the least 5 nationalities in the result-set.
@@ -78,6 +88,16 @@
     FROM Authors
     INNER JOIN Books
     ON Books.AuthorID = Authors.AuthorID
+    INNER JOIN Borrowers
+    ON Books.BookID = Borrowers.BookID
+    WHERE BorrowDate BETWEEN '2015-01-01' AND '2017-12-31'
+    GROUP BY AuthorNationality
+    ORDER BY COUNT(Borrowers.BookID) LIMIT 5;
+
+      SELECT AuthorNationality
+    FROM Authors
+    INNER JOIN Books
+    ON Authors.AuthorID = Books.AuthorID
     INNER JOIN Borrowers
     ON Books.BookID = Borrowers.BookID
     WHERE BorrowDate BETWEEN '2015-01-01' AND '2017-12-31'
@@ -103,6 +123,7 @@ ON Books.BookID = Borrowers.BookID
 WHERE BorrowDate BETWEEN '2015-01-01' AND '2017-12-31'
 GROUP BY Borrowers.BookID
 ORDER BY COUNT(Borrowers.BookID) DESC LIMIT 1;
+
 
 -- 7. Top borrowed genres for client born in years 1970-1980 --
 
@@ -150,6 +171,14 @@ WHERE YEAR(BorrowDate) = 2016
 GROUP BY Occupation
 ORDER BY COUNT(Borrowers.ClientID) DESC LIMIT 5;
 
+SELECT Occupation
+FROM Clients
+INNER JOIN Borrowers
+ON Clients.ClientID = Borrowers.ClientID
+WHERE YEAR(BorrowDate) = 2016
+GROUP BY Occupation
+ORDER BY COUNT(Borrowers.ClientID) DESC LIMIT 5;
+
 
 -- 9. Average number of borrowed books by job title -- 
 
@@ -168,6 +197,13 @@ INNER JOIN Borrowers
 ON Borrowers.ClientID = Clients.ClientID
 GROUP BY Clients.Occupation;
 
+SELECT Clients.Occupation, ROUND(COUNT(Clients.Occupation) / COUNT(DISTINCT Borrowers.ClientID)) AS Average_Number_Borrowed
+FROM Clients
+INNER JOIN Borrowers
+ON Clients.ClientID = Borrowers.ClientID
+GROUP BY Clients.Occupation;
+
+
 
 -- 10. Create a VIEW and display the titles that were borrowed by at least 20% of clients --
 
@@ -179,13 +215,54 @@ ON Borrowers.BookID = Books.BookID
 GROUP BY BookTitle
 HAVING COUNT(Borrowers.ClientID) >= (COUNT(Borrowers.ClientID)*0.2)
 
+CREATE VIEW `books borrowed by 20% of the clients` AS 
+SELECT BookTitle
+FROM Books
+INNER JOIN Borrowers
+ON Books.BookID = Borrowers.BookID
+GROUP BY BookTitle
+HAVING COUNT(Borrowers.ClientID) >= (COUNT(Borrowers.ClientID)*0.2)
+
+
 -- 11. The top month of borrows in 2017 --
+
+ SELECT MONTH(BorrowDate) AS Top_Month, COUNT(MONTH(BorrowDate)) AS Amount_of_books_borrowed
+ FROM Borrowers
+ WHERE YEAR(BorrowDate) = 2017
+ GROUP BY MONTH(BorrowDate)
+ ORDER BY Amount_of_books_borrowed DESC LIMIT 5;
 
 -- 12. Average number of borrows by age --
 
+SELECT DISTINCT (YEAR(NOW())-Clients.ClientDOB) AS AGE, ROUND(COUNT(Clients.ClientID)/ COUNT(DISTINCT Borrowers.ClientID))AS Average_Borrowed
+FROM Clients
+INNER JOIN Borrowers
+ON Borrowers.ClientID = Clients.ClientID
+GROUP BY AGE;
+
+SELECT DISTINCT (YEAR(NOW())-Clients.ClientDOB) AS AGE, ROUND(COUNT(Clients.ClientID)/ COUNT(DISTINCT Borrowers.ClientID))AS Average_Borrowed
+FROM Clients
+INNER JOIN Borrowers
+ON Clients.ClientID = Borrowers.ClientID
+GROUP BY AGE;
+
+
 -- 13. The oldest and the youngest clients of the library --
+
+SELECT MAX(YEAR(NOW())-Clients.ClientDOB) AS Oldest_Client, MIN(YEAR(NOW())-Clients.ClientDOB) AS Youngest_Client
+FROM Clients
+INNER JOIN Borrowers
+Clients.ClientID
+ON Clients.ClientID = Borrowers.ClientID;
 
 -- 14. First and last names of authors that wrote books in more than one genre --
 
+
+SELECT Authors.AuthorFirstName AS First_Name, Authors.AuthorLastName AS Last_Name 
+FROM Authors
+INNER JOIN Books
+ON Authors.AuthorID = Books.AuthorID
+GROUP BY Authors.AuthorID
+HAVING (COUNT(DISTINCT Books.Genre) > 1);
 
 -- As you work on these queries, create indexes that will increase your queries' performance.You must include comments in your code that address the purpose of your query and explains each step. Save your queries and results in a plain-text file that you will submit as your assignment. --
