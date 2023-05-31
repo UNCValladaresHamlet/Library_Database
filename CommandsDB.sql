@@ -100,11 +100,11 @@ INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) val
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Colette', 'Rowe', 1963  , 'Professor');
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Diane', 'Clark', 1975  , 'Payroll Clerk');
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Caroline', 'Clark', 1960 , 'Dentist');
-INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Dalton', 'Clayton', 1982 , '	Police Officer');
+INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Dalton', 'Clayton', 1982 , 'Police Officer');
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Steve', 'Clayton', 1990  , 'Bus Driver');
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Melanie', 'Clayton', 1987  , 'Computer Engineer');
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Alana', 'Wilson', 2007 , 'Student');
-INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Carson', 'Byrne', 1995 , '	Food Scientist');
+INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Carson', 'Byrne', 1995 , 'Food Scientist');
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Conrad', 'Byrne', 2007  , 'Student');
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Ryan', '	Porter', 2008  , 'Student');
 INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) values ('Elin', 'Porter', 1978  , 'Computer Programmer');
@@ -152,7 +152,7 @@ INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 1 , 3 , '2017-04-1
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 42  , 8 , '2016-10-03' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 62 , 16 , '2016-04-05' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 53 , 13 , '2017-01-17' );
-INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 33 , 15 , '2015-11-26'  );
+INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 33 , 15 , '2015-11-26' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 40 , 14 , '2015-01-21' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 64 , 2 , '2017-09-10' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 56 , 30 , '2017-08-02' );
