@@ -22,9 +22,9 @@
 
 -- 3. First and last names of clients that borrowed books in March 2018 --
 
--- This commands selects these specific columns: ClientFirstName and ClientLastName from the Clients table.
+-- This command selects these specific columns: ClientFirstName and ClientLastName from the Clients table.
 -- I used a INNER JOIN to selects records that help me find the matching values from the Clients table and the selected Borrowers table. I specified which tables and columns I wanted to access using the ON keyword. I used the 'ClientsID' column that the tables both share to finish the INNER JOIN. I used the WHERE clause to filter the records in order to extract only those records in the 'BorrowDate' column that are between the March 1st, 2018 and March 31st, 2018. I used a GROUP BY statement to group the result-set by the 'ClientsID' column. I originally added a auto increment in the ClientsID column which lists the table data in ascending order.
-
+-- I attached MySQL syntax as well:
 -- SELECT column_name(s)
 -- FROM table1
 -- INNER JOIN table2
@@ -40,6 +40,18 @@
     GROUP BY Clients.ClientID;
 
 -- 4. First and last names of the top 5 authors clients borrowed in 2017 --
+
+-- This command selects these specific columns: AuthorFirstName, AuthorLastName from the Authors table.
+-- I used a INNER JOIN to selects records that help me find the matching values from the Authors table and the selected Books table. I specified which tables and columns I wanted to access using the ON keyword. I used the 'AuthorsID' column that the tables both share to finish the INNER JOIN. I used the WHERE clause to filter the records in order to extract only those records in the 'BorrowDate' column that are between the January 1st, 2017 and December 31st, 2017. I used a GROUP BY statement to group the result-set by the 'BookID' column. I then used the ORDER BY keyword and the The COUNT() function to count how many times the number of books was borrowed in the "Borrowed" table. I sorted the result-set in descending order (Included the DESC keyword) and used a LIMIT clause to specify the number of records to return, I used 5 to result in the top 5 authors.
+-- I attached MySQL syntax as well:
+-- SELECT column_name(s)
+-- FROM table1
+-- INNER JOIN table2
+-- ON table1.column_name = table2.column_name;
+-- WHERE condition
+-- GROUP BY column_name(s)
+-- ORDER BY column_name COUNT(column_name) ASC|DESC LIMIT number;
+
     SELECT AuthorFirstName, AuthorLastName
     FROM Authors
     INNER JOIN Books
@@ -49,14 +61,27 @@
     WHERE BorrowDate Between '2017-01-01' AND '2017-12-31'
     GROUP BY Borrowers.BookID
     ORDER BY COUNT(Borrowers.BookID) DESC LIMIT 5;
+
 -- 5. Nationalities of the least 5 authors that clients borrowed during the years 2015-2017 --
+
+-- This command selects these specific column: AuthorNationality from the Authors table.
+-- I used a INNER JOIN to selects records that help me find the matching values from the Authors table and the selected Books table. I specified which tables and columns I wanted to access using the ON keyword. I used the 'AuthorsID' column that the tables both share to finish the INNER JOIN. I used the WHERE clause to filter the records in order to extract only those records in the 'BorrowDate' column that are between the January 1st, 2015 and December 31st, 2017. I used a GROUP BY statement to group the result-set by the 'AuthorNationality' column. I then used the ORDER BY keyword and the The COUNT() function to count how many times the number of books was borrowed in the "Borrowed" table. I originally added a auto increment in the Book ID column which lists the table data in ascending order. I sorted the result-set and used a LIMIT clause to specify the number of records to return, I used 5 to list the least 5 nationalities in the result-set.
+-- I attached MySQL syntax as well:
+-- SELECT column_name(s)
+-- FROM table1
+-- INNER JOIN table2
+-- ON table1.column_name = table2.column_name;
+-- WHERE condition
+-- GROUP BY column_name(s)
+-- ORDER BY column_name COUNT(column_name) ASC|DESC LIMIT number;
+
     SELECT AuthorNationality
     FROM Authors
     INNER JOIN Books
-    ON Books.AuthorID = Authors.AuthorId
+    ON Books.AuthorID = Authors.AuthorID
     INNER JOIN Borrowers
     ON Books.BookID = Borrowers.BookID
-    WHERE BorrowDate Between '2015-01-01' AND '2017-01-01'
+    WHERE BorrowDate Between '2015-01-01' AND '2017-12-31'
     GROUP BY AuthorNationality
     ORDER BY COUNT(Borrowers.BookID) LIMIT 5;
 
