@@ -53,16 +53,6 @@
     SELECT AuthorFirstName, AuthorLastName
     FROM Authors
     INNER JOIN Books
-    ON Books.AuthorID = Authors.AuthorID
-    INNER JOIN Borrowers
-    ON Books.BookID = Borrowers.BookID
-    WHERE BorrowDate BETWEEN '2017-01-01' AND '2017-12-31'
-    GROUP BY Borrowers.BookID
-    ORDER BY COUNT(Borrowers.BookID) DESC LIMIT 5;
-
-    SELECT AuthorFirstName, AuthorLastName
-    FROM Authors
-    INNER JOIN Books
     ON Authors.AuthorID = Books.AuthorID
     INNER JOIN Borrowers
     ON Borrowers.BookID = Books.BookID
@@ -85,16 +75,6 @@
 -- ORDER BY column_name COUNT(column_name) ASC|DESC LIMIT number;
 
     SELECT AuthorNationality
-    FROM Authors
-    INNER JOIN Books
-    ON Books.AuthorID = Authors.AuthorID
-    INNER JOIN Borrowers
-    ON Books.BookID = Borrowers.BookID
-    WHERE BorrowDate BETWEEN '2015-01-01' AND '2017-12-31'
-    GROUP BY AuthorNationality
-    ORDER BY COUNT(Borrowers.BookID) LIMIT 5;
-
-      SELECT AuthorNationality
     FROM Authors
     INNER JOIN Books
     ON Authors.AuthorID = Books.AuthorID
@@ -162,15 +142,6 @@ ORDER BY Books.Genre;
 -- GROUP BY column_name(s)
 -- ORDER BY COUNT(column_name) ASC|DESC LIMIT number;
 
-
-SELECT Occupation
-FROM Clients
-INNER JOIN Borrowers
-ON Borrowers.ClientID = Clients.ClientID
-WHERE YEAR(BorrowDate) = 2016
-GROUP BY Occupation
-ORDER BY COUNT(Borrowers.ClientID) DESC LIMIT 5;
-
 SELECT Occupation
 FROM Clients
 INNER JOIN Borrowers
@@ -190,30 +161,13 @@ ORDER BY COUNT(Borrowers.ClientID) DESC LIMIT 5;
 -- ON table1.column_name = table2.column_name;
 -- GROUP BY column_name(s)
 
-
-SELECT Clients.Occupation, ROUND(COUNT(Clients.Occupation) / COUNT(DISTINCT Borrowers.ClientID)) AS Average_Number_Borrowed
-FROM Clients
-INNER JOIN Borrowers
-ON Borrowers.ClientID = Clients.ClientID
-GROUP BY Clients.Occupation;
-
 SELECT Clients.Occupation, ROUND(COUNT(Clients.Occupation) / COUNT(DISTINCT Borrowers.ClientID)) AS Average_Number_Borrowed
 FROM Clients
 INNER JOIN Borrowers
 ON Clients.ClientID = Borrowers.ClientID
 GROUP BY Clients.Occupation;
 
-
-
 -- 10. Create a VIEW and display the titles that were borrowed by at least 20% of clients --
-
-CREATE VIEW `books borrowed by 20% of the clients` AS 
-SELECT BookTitle
-FROM Books
-INNER JOIN Borrowers
-ON Borrowers.BookID = Books.BookID
-GROUP BY BookTitle
-HAVING COUNT(Borrowers.ClientID) >= (COUNT(Borrowers.ClientID)*0.2)
 
 CREATE VIEW `books borrowed by 20% of the clients` AS 
 SELECT BookTitle
@@ -237,12 +191,6 @@ HAVING COUNT(Borrowers.ClientID) >= (COUNT(Borrowers.ClientID)*0.2)
 SELECT DISTINCT (YEAR(NOW())-Clients.ClientDOB) AS AGE, ROUND(COUNT(Clients.ClientID)/ COUNT(DISTINCT Borrowers.ClientID))AS Average_Borrowed
 FROM Clients
 INNER JOIN Borrowers
-ON Borrowers.ClientID = Clients.ClientID
-GROUP BY AGE;
-
-SELECT DISTINCT (YEAR(NOW())-Clients.ClientDOB) AS AGE, ROUND(COUNT(Clients.ClientID)/ COUNT(DISTINCT Borrowers.ClientID))AS Average_Borrowed
-FROM Clients
-INNER JOIN Borrowers
 ON Clients.ClientID = Borrowers.ClientID
 GROUP BY AGE;
 
@@ -252,7 +200,6 @@ GROUP BY AGE;
 SELECT MAX(YEAR(NOW())-Clients.ClientDOB) AS Oldest_Client, MIN(YEAR(NOW())-Clients.ClientDOB) AS Youngest_Client
 FROM Clients
 INNER JOIN Borrowers
-Clients.ClientID
 ON Clients.ClientID = Borrowers.ClientID;
 
 -- 14. First and last names of authors that wrote books in more than one genre --
