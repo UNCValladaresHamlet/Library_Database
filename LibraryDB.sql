@@ -21,6 +21,11 @@ CREATE TABLE Authors (
     PRIMARY KEY (AuthorID)
 );
 
+-- Query to verify if the 'Authors' database was created
+    SELECT *
+    FROM Authors;
+
+
 -- Creates the table "Books" within library_db --
 CREATE TABLE Books (
     -- Makes a numeric column called "BookID" which will automatically increment its default value as we create new rows, which cannot contain null --
@@ -37,6 +42,10 @@ CREATE TABLE Books (
     FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID)
 );
 
+-- Query to verify if the 'Books' database was created
+    SELECT *
+    FROM Books;
+
 CREATE TABLE Clients (
     -- Makes a numeric column called "ClientID" which will automatically increment its default value as we create new rows, which cannot contain null --
     ClientID int AUTO_INCREMENT NOT NULL,
@@ -51,6 +60,11 @@ CREATE TABLE Clients (
     -- SQL creates a PRIMARY KEY on the "ClientID" column when the "Clients" table is created --
     PRIMARY KEY (ClientID)
 );
+
+-- Query to verify if the 'Clients' database was created
+    SELECT *
+    FROM Clients;
+
 
 -- Creates the table "Borrowers" within library_db --
 CREATE TABLE Borrowers (
@@ -69,6 +83,10 @@ CREATE TABLE Borrowers (
     -- SQL creates a FOREIGN KEY on the "BookID" column when the "Borrower" table is created--
     FOREIGN KEY (BookID) REFERENCES Books(BookID)
 );
+
+-- Query to verify if the 'Borrowers' database was created
+    SELECT *
+    FROM Borrowers;
 
 
 

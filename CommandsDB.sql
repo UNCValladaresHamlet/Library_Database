@@ -146,7 +146,6 @@ INSERT INTO Clients (ClientFirstName, ClientLastName, ClientDOB, Occupation) val
 
 -- Creates new rows containing data in all named columns for the 'Borrowers' table --
 
-
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 35 , 17 , '2016-07-20' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 1 , 3 , '2017-04-19' );
 INSERT INTO Borrowers (ClientID, BookID, BorrowDate) values ( 42  , 8 , '2016-10-03' );
