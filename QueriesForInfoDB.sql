@@ -169,7 +169,7 @@ GROUP BY Clients.Occupation;
 
 -- 10. Create a VIEW and display the titles that were borrowed by at least 20% of clients --
 
--- Creating a view in SQL allows the user to easily find relevant information in large datasets. I created a view with the CREATE VIEW statement and gave it the name 'books borrowed by 20% of the clients' to preserve the importance of this view table. I use SELECT to identify the existing column I wish to pull into the view, which is 'BookTitle' column from the 'Books' table. I used a INNER JOIN to selects records that help me find the matching values from the 'Books' table and the selected 'Borrowers' table. I specified which tables and columns I wanted to access using the ON keyword. I used the 'BookID' column that the tables both share to finish the INNER JOIN. I used a GROUP BY statement to group the result-set by the 'BookTitle' column. I then used the HAVING clause to specify filter conditions for a group of rows or aggregates.
+-- Creating a view in SQL allows the user to easily find relevant information in large datasets. I created a view with the CREATE VIEW statement and gave it the name 'books borrowed by 20% of the clients' to preserve the importance of this view table. I use SELECT to identify the existing column I wish to pull into the view, which is 'BookTitle' column from the 'Books' table. I used a INNER JOIN to selects records that help me find the matching values from the 'Books' table and the selected 'Borrowers' table. I specified which tables and columns I wanted to access using the ON keyword. I used the 'BookID' column that the tables both share to finish the INNER JOIN. I used a GROUP BY statement to group the result-set by the 'BookTitle' column. I then used the HAVING clause to specify filter conditions for a group of rows or aggregates. This condition is applied after the GROUP BY clause in the SQL query. It compares the count of Borrowers' client IDs with 20% of the total count of Borrowers' client IDs.
 
 -- I attached MySQL syntax as well:
 -- CREATE VIEW view_name AS
@@ -204,8 +204,15 @@ FROM `books borrowed by 20% of the clients`;
  ORDER BY Amount_of_books_borrowed DESC LIMIT 5;
 
 -- 12. Average number of borrows by age --
+-- I used the DISTINCT clause to retrieve unique values from the result set, it ensures that each age value appears only once in the output. I used the YEAR() function to return the year component for a given date and used a NOW() function to return the current date and time. I used that date information to subtract the current year from the Client DOB year which results in the current age of the result-set clients. Using the COUNT() function, I counted how many clients (accessing their 'ClientID' column through the 'Clients' table). I then divided and used the COUNT function again, alongside the DISTINCT clause to make sure I only count the different (distinct values), of how many books were borrowed by these people (accessing their ClientID through the 'Borrowers' table) and rounded the resulting value. Used the AS command to rename the column to a different column name "Average_Number_Borrowed". I used a INNER JOIN to selects records that help me find the matching values from the 'Clients' table and the selected 'Borrowers' table. I specified which tables and columns I wanted to access using the ON keyword. I used the 'ClientID' column that the tables both share to finish the INNER JOIN. I used a GROUP BY statement to group the result-set by the 'Age' column.
+-- I attached MySQL syntax as well:
+-- SELECT DISTINCT (YEAR(NOW())-column_name) AS alias_name , ROUND(COUNT(column_name)) / COUNT(DISTINCT column_name)) AS alias_name
+-- FROM table1
+-- INNER JOIN table2
+-- ON table1.column_name = table2.column_name;
+-- GROUP BY group_by_expression
 
-SELECT DISTINCT (YEAR(NOW())-Clients.ClientDOB) AS AGE, ROUND(COUNT(Clients.ClientID)/ COUNT(DISTINCT Borrowers.ClientID))AS Average_Borrowed
+SELECT DISTINCT (YEAR(NOW())-Clients.ClientDOB) AS AGE, ROUND(COUNT(Clients.ClientID)/ COUNT(DISTINCT Borrowers.ClientID)) AS Average_Number_Borrowed
 FROM Clients
 INNER JOIN Borrowers
 ON Clients.ClientID = Borrowers.ClientID
@@ -214,12 +221,21 @@ GROUP BY AGE;
 
 -- 13. The oldest and the youngest clients of the library --
 
+--  I used the MAX() function to calculate the age of the oldest client in terms of the maximum age. I used the YEAR() function to return the year component for a given date and used a NOW() function to return the current date and time. I used that date information to subtract the current year from the Client DOB year which results in the current age of the result-set clients. Used the AS command to rename the column to a different column name "Oldest_Client". I then used the MIN() function to calculate the age of the youngest client in terms of the minimum age. I used the YEAR() function again to return the year component for a given date and used a NOW() function to return the current date and time. I used that date information to subtract the current year from the Client DOB year which results in the current age of the result-set clients. Used the AS command to rename the column to a different column name "Youngest_Client". I used a INNER JOIN to selects records that help me find the matching values from the 'Clients' table and the selected 'Borrowers' table. I specified which tables and columns I wanted to access using the ON keyword. I used the 'ClientID' column that the tables both share to finish the INNER JOIN. 
+-- I attached MySQL syntax as well:
+-- SELECT DISTINCT(YEAR(NOW())-column_name) AS alias_name , ROUND(COUNT(column_name)) / COUNT(DISTINCT column_name)) AS alias_name
+-- FROM table1
+-- INNER JOIN table2
+-- ON table1.column_name = table2.column_name;
+-- GROUP BY group_by_expression7
+
 SELECT MAX(YEAR(NOW())-Clients.ClientDOB) AS Oldest_Client, MIN(YEAR(NOW())-Clients.ClientDOB) AS Youngest_Client
 FROM Clients
 INNER JOIN Borrowers
 ON Clients.ClientID = Borrowers.ClientID;
 
 -- 14. First and last names of authors that wrote books in more than one genre --
+-- This query selects the 'AuthorFirstName' from the 'Authors' table and I used the AS command to rename the column to a different column name "First_Name" also from the 'Authors' table. I also selected the AuthorLastName and used the AS command to rename the column to a different column name "Last_Name". I used a INNER JOIN to selects records that help me find the matching values from the 'Authors' table and the selected 'Books' table. I specified which tables and columns I wanted to access using the ON keyword. I used the 'AuthorID' column that the tables both share to finish the INNER JOIN. I used a GROUP BY statement to group the result-set by the 'AuthorID' column. I then used the HAVING clause to specify filter conditions for a group of rows or aggregates. This condition is applied after the GROUP BY clause in the SQL query. It checks if the count of distinct genres of books is greater than 1.
 
 
 SELECT Authors.AuthorFirstName AS First_Name, Authors.AuthorLastName AS Last_Name 
