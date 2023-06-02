@@ -1,3 +1,6 @@
+-- Drops the library_db if it exists currently --
+DROP DATABASE IF EXISTS library_db;
+
 -- Creates the "library_db" database --
 CREATE DATABASE library_db;
 
