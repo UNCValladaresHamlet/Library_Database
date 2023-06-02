@@ -25,7 +25,6 @@ CREATE TABLE Authors (
     SELECT *
     FROM Authors;
 
-
 -- Creates the table "Books" within library_db --
 CREATE TABLE Books (
     -- Makes a numeric column called "BookID" which will automatically increment its default value as we create new rows, which cannot contain null --
@@ -64,7 +63,6 @@ CREATE TABLE Clients (
 -- Query to verify if the 'Clients' database was created
     SELECT *
     FROM Clients;
-
 
 -- Creates the table "Borrowers" within library_db --
 CREATE TABLE Borrowers (
